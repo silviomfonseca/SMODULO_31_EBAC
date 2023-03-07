@@ -1,0 +1,21 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Clonar o repositorio') {
+            steps {
+               git branch: 'main', url: 'https://github.com/silviomfonseca/Smodulo_31_ebac.git'
+            }
+        }
+        stage('Instalar dependencias') {
+            steps {
+               powershell 'npm install'
+            }
+        }
+        stage('Executar Testes') {
+            steps {
+              powershell 'npm run cy:run' 
+            }
+        }
+    }
+}
